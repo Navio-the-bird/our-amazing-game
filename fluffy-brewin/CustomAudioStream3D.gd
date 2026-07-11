@@ -1,7 +1,6 @@
-class_name CustomAudioStreamPlayer 
+class_name CustomAudioStreamPlayer3D 
 extends Node3D
 ## A non localised audio player allowing for more complex behaviour than godot's default.
-
 
 ## How to cycle through the music streams 					[br]
 ## 
@@ -53,14 +52,26 @@ enum VariationMode {
 ## Factor of the pitch variation
 @export var pitch_variation : float = 0.01
 
+@export_group("Positional Audio")
+## See [member AudioStreamPlayer3D.attenuation_filter_cutoff_hz]
+@export var attenuation_filter_cutoff_hz : float = 5000.0
+## See [member AudioStreamPlayer3D.attenuation_filter_db]
+@export var attenuation_filter_db : float = -24.0
+## See [member AudioStreamPlayer3D.attenuation_model]
+@export var attenuation_model : AudioStreamPlayer3D.AttenuationModel = AudioStreamPlayer3D.AttenuationModel.ATTENUATION_INVERSE_DISTANCE
+## See [member AudioStreamPlayer3D.doppler_tracking]
+@export var doppler_tracking : AudioStreamPlayer3D.DopplerTracking = AudioStreamPlayer3D.DopplerTracking.DOPPLER_TRACKING_IDLE_STEP
+## See [member AudioStreamPlayer3D.stereo_strength]
+@export_range(0, 3) var stereo_strength : float = 1.0
+
 @export_group("Files")
 ## A selection of audio streams to choose from
 @export var audio_streams : Array[AudioStream]
 
 ## Keeps track of the last triggered sound index from [member audio_streams]
 var last_triggered_index : int = 0
-## A list of all currently playing [AudioStreamPlayer]s
-var currently_playing : Array[AudioStreamPlayer]
+## A list of all currently playing [AudioStreamPlayer3D]s
+var currently_playing : Array[AudioStreamPlayer3D]
 
 ## Increments the counter variable [member last_triggered_index] according to the selected [member variation_mode]
 func increment_index():
@@ -78,7 +89,7 @@ func increment_index():
 		
 		# default
 		_:
-			printerr("Unimplemented enum case in CustomAudioStreamPlayer")
+			printerr("Unimplemented enum case in CustomAudioStreamPlayer3D")
 
 ## returns a variation with value according to [member enable_variation] and [member variation_mode]
 func rand_variation(value : float, variation : float) -> float:
@@ -97,15 +108,15 @@ func rand_variation(value : float, variation : float) -> float:
 			return 0
 
 ## Initialises a basic stream player and sets its volume, stream file and pitch
-func initialise_stream_player() -> AudioStreamPlayer:
-	var stream_player : AudioStreamPlayer = AudioStreamPlayer.new()
+func initialise_stream_player() -> AudioStreamPlayer3D:
+	var stream_player : AudioStreamPlayer3D = AudioStreamPlayer3D.new()
 	stream_player.stream = audio_streams[last_triggered_index]
 	stream_player.volume_db = rand_variation(base_volume, volume_variation)
 	stream_player.pitch_scale = rand_variation(base_pitch, pitch_variation)
 	return stream_player
 
 ## Performs a bsearch to delete a stream player from [member currently_playing]
-func delete_stream_player(stream_player : AudioStreamPlayer):
+func delete_stream_player(stream_player : AudioStreamPlayer3D):
 	stream_player.stop()
 	currently_playing.remove_at(currently_playing.bsearch(stream_player))
 	stream_player.queue_free()
@@ -114,11 +125,10 @@ func delete_stream_player(stream_player : AudioStreamPlayer):
 func play():
 	var stream_player = initialise_stream_player()
 	add_child(stream_player)
-	print(stream_player)
+	stream_player.global_position = self.global_position
 	currently_playing.append(stream_player)
 	stream_player.play()
 	stream_player.finished.connect(delete_stream_player.bind(stream_player))
-	print("Playing")
 	increment_index()
 
 ## Stops all currently playing sound files
