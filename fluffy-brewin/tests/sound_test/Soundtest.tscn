@@ -22,11 +22,6 @@ text = "Stop all"
 
 [node name="CustomAudioStreamPlayer3D" type="Node3D" parent="." unique_id=274959652]
 script = ExtResource("1_3jhqv")
-player_cycle_mode = 1
-base_volume = null
-base_pitch = 1.0
-enable_variation = true
-variation_mode = 1
 volume_variation = 1.0
 pitch_variation = 0.9
 audio_streams = Array[AudioStream]([ExtResource("2_s216g"), ExtResource("3_scrt8"), ExtResource("4_uyhl0"), ExtResource("5_ssbvt"), ExtResource("6_djw0i")])
