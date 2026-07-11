@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dottpnvqsv301"]
+
+[node name="CSGBox3D" type="CSGBox3D" unique_id=1882103732]
+transform = Transform3D(3.3, 0, 0, 0, 3.1000001, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=253344823]
+transform = Transform3D(0.25083825, 0, 0, 0, 0.010624698, -0.32310858, 0, 0.78034645, 0.0043992386, -0.205831, 0.23535089, 0.055217147)
+operation = 2
+radius = 0.4033203
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=2078706550]
+transform = Transform3D(0.25083825, 0, 0, 0, 0.010624698, -0.32310858, 0, 0.78034645, 0.0043992386, 0.22012103, 0.23535089, 0.055217147)
+operation = 2
+radius = 0.4033203
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="." unique_id=939546136]
+transform = Transform3D(0.4981813, 0, 0, 0, 0.010618311, -0.36696953, 0, 0.7798773, 0.0049964203, 0.032794278, -0.20829639, 0.055217147)
+operation = 2
+radius = 0.4033203
