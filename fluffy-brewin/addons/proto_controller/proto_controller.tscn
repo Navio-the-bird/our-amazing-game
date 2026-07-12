@@ -37,3 +37,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.6898315, 0, 0, 0)
 target_position = Vector3(0, 0, -1)
+
+[node name="LevitatePosition" type="Marker3D" parent="Head/Camera3D" unique_id=1962052524]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.020298)
+
+[node name="LevitateMinPosition" type="Marker3D" parent="Head/Camera3D" unique_id=1041322464]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.898093)
+
+[node name="GrabCast" type="RayCast3D" parent="Head/Camera3D" unique_id=2028942950]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 37.608253, 0, 0, 0)
+target_position = Vector3(0, 0, -1)

@@ -51,6 +51,10 @@ var look_rotation : Vector2
 var move_speed : float = 0.0
 var freeflying : bool = false
 
+var holding_item:bool = false
+var held_item:RigidBody3D = null
+var held_object_pull_force:float = 10.0
+
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
@@ -59,11 +63,17 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	#I'm using a second marker as the closes position to the player
+	#Now technically I could have used a numeric value or something instead of a marker but this is more visual
+	%LevitatePosition.global_position = %LevitateMinPosition.global_position
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		capture_mouse()
+		_handle_grab()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		_handle_item_shoot()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		release_mouse()
 	
@@ -80,6 +90,44 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			disable_freefly()
 			
+			
+func _handle_item_shoot() -> void:
+	if (holding_item):
+		held_item.gravity_scale = 1
+		held_item.angular_damp = 0
+		var player_pos = %LevitatePosition.get_parent_node_3d().global_position
+		var current_pos = held_item.global_position
+		var direction = current_pos - player_pos
+		held_item.linear_velocity = direction * 20
+		holding_item = false
+		held_item = null
+		print('Shooting item')
+	
+func _handle_grab() -> void:
+	if (holding_item):
+		held_item.gravity_scale = 1
+		held_item.angular_damp = 0
+		holding_item = false
+		held_item = null
+		print('Dropping item')
+		return
+		
+	if %GrabCast.is_colliding():
+		var col_obj = %GrabCast.get_collider()
+		if (col_obj.is_in_group('pickup')):
+			print('Picking up item')
+			held_item = col_obj as RigidBody3D
+			
+			#Apparently this can help, but I'll decide if I want to keep ang vel.
+			held_item.linear_velocity = Vector3.ZERO
+			held_item.angular_velocity = Vector3.ZERO
+			held_item.gravity_scale = 0
+			held_item.angular_damp = 1
+			holding_item = true
+		else:
+			print('Cannot pick up ',col_obj)
+		
+	
 func _handle_interaction() -> void:
 	if %InteractCast.is_colliding():
 		var col_obj = %InteractCast.get_collider()
@@ -87,6 +135,16 @@ func _handle_interaction() -> void:
 			(col_obj as BaseInteractable)._interact()
 
 func _physics_process(delta: float) -> void:	
+	if (holding_item): #Just make the object keep up with the marker
+		if (!(is_instance_valid(held_item))):
+			held_item = null
+			holding_item = false
+		else:
+			var target_pos = %LevitatePosition.global_position
+			var current_pos = held_item.global_position
+			var direction = target_pos - current_pos
+			held_item.linear_velocity = direction * held_object_pull_force
+	
 	# If freeflying, handle freefly and nothing else
 	if can_freefly and freeflying:
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)

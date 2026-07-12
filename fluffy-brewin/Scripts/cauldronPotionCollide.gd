@@ -29,5 +29,6 @@ func on_potion_complete() -> void:
 	var new_flask = flask_scene.instantiate() as Flask
 	new_flask.contained_ingredients = added_ingredients.duplicate()	
 	new_flask.global_position = flask_spawn_point.global_position
+	new_flask.add_to_group('pickup')
 	flask_spawn_parent.add_child(new_flask)
 	added_ingredients.clear()

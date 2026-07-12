@@ -52,10 +52,10 @@ flask_spawn_parent = NodePath("..")
 flask_spawn_point = NodePath("../FlaskSpawnPoint")
 
 [node name="ProtoController" parent="." unique_id=1795648403 instance=ExtResource("2_7xjom")]
-transform = Transform3D(0.21915703, 0, 0.97568965, 0, 1, 0, -0.97568965, 0, 0.21915703, 4.7645135, 2.2611413, -0.30158663)
+transform = Transform3D(-0.99945325, 0, -0.03306286, 0, 1, 0, 0.03306286, 0, -0.99945325, 4.7645135, 2.2611413, -0.30158663)
 
-[node name="Root1" parent="." unique_id=857031478 instance=ExtResource("3_2vwwt")]
-transform = Transform3D(0.99683917, 0.079445794, 0, -0.079445794, 0.99683917, 0, 0, 0, 1, 0.033293724, 4.49283, -0.26619983)
+[node name="Root1" parent="." unique_id=857031478 groups=["pickup"] instance=ExtResource("3_2vwwt")]
+transform = Transform3D(0.99683917, 0.079445794, 0, -0.079445794, 0.99683917, 0, 0, 0, 1, 5.0506535, 2.9323263, 6.049055)
 ingredient_data = SubResource("Resource_ft1c3")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1277158251]
