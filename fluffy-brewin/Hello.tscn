@@ -1,19 +1,136 @@
 [gd_scene format=3 uid="uid://dottpnvqsv301"]
 
-[node name="CSGBox3D" type="CSGBox3D" unique_id=1882103732]
-transform = Transform3D(3.3, 0, 0, 0, 3.1000001, 0, 0, 0, 1, 0, 0, 0)
+[ext_resource type="PackedScene" uid="uid://clyaqafn5ls2d" path="res://Scenes/Cauldron.tscn" id="1_8lf4w"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_7xjom"]
+[ext_resource type="PackedScene" uid="uid://704ek5cfaeeh" path="res://Scenes/flask.tscn" id="2_t7i3c"]
+[ext_resource type="PackedScene" uid="uid://c2itingewxosc" path="res://Scenes/Root1.tscn" id="3_2vwwt"]
+[ext_resource type="Script" uid="uid://c886obo2bfv5t" path="res://Scripts/Ingredient.gd" id="4_gx60c"]
+[ext_resource type="PackedScene" uid="uid://bc4mtbmj21la8" path="res://Scenes/Button.tscn" id="5_gx60c"]
+[ext_resource type="PackedScene" uid="uid://c5ecjme2hk28v" path="res://Scenes/PotionPortal.tscn" id="7_vhlyg"]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=253344823]
-transform = Transform3D(0.25083825, 0, 0, 0, 0.010624698, -0.32310858, 0, 0.78034645, 0.0043992386, -0.205831, 0.23535089, 0.055217147)
-operation = 2
-radius = 0.4033203
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7xjom"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=2078706550]
-transform = Transform3D(0.25083825, 0, 0, 0, 0.010624698, -0.32310858, 0, 0.78034645, 0.0043992386, 0.22012103, 0.23535089, 0.055217147)
-operation = 2
-radius = 0.4033203
+[sub_resource type="Sky" id="Sky_x3ul6"]
+sky_material = SubResource("ProceduralSkyMaterial_7xjom")
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="." unique_id=939546136]
-transform = Transform3D(0.4981813, 0, 0, 0, 0.010618311, -0.36696953, 0, 0.7798773, 0.0049964203, 0.032794278, -0.20829639, 0.055217147)
+[sub_resource type="Environment" id="Environment_2vwwt"]
+background_mode = 2
+sky = SubResource("Sky_x3ul6")
+
+[sub_resource type="Resource" id="Resource_ft1c3"]
+script = ExtResource("4_gx60c")
+name = "Red Root"
+metadata/_custom_type_script = "uid://c886obo2bfv5t"
+
+[node name="Node3D" type="Node3D" unique_id=17607480]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1528003283]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=858015932]
+environment = SubResource("Environment_2vwwt")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1588818412]
+transform = Transform3D(4.259492, 0, 0, 0, 4.259492, 0, 0, 0, 4.259492, 0, 0, 0)
+use_collision = true
+size = Vector3(26.111572, 1, 26.774414)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D" unique_id=1499987762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10677193, 0)
 operation = 2
-radius = 0.4033203
+radius = 0.6352539
+height = 1.4082031
+sides = 12
+
+[node name="Cauldron" parent="." unique_id=1898748181 node_paths=PackedStringArray("flask_spawn_parent", "flask_spawn_point") instance=ExtResource("1_8lf4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12817478, 2.169147, -0.11294174)
+flask_scene = ExtResource("2_t7i3c")
+flask_spawn_parent = NodePath("..")
+flask_spawn_point = NodePath("../FlaskSpawnPoint")
+
+[node name="ProtoController" parent="." unique_id=1795648403 instance=ExtResource("2_7xjom")]
+transform = Transform3D(0.21915703, 0, 0.97568965, 0, 1, 0, -0.97568965, 0, 0.21915703, 4.7645135, 2.2611413, -0.30158663)
+
+[node name="Root1" parent="." unique_id=857031478 instance=ExtResource("3_2vwwt")]
+transform = Transform3D(0.99683917, 0.079445794, 0, -0.079445794, 0.99683917, 0, 0, 0, 1, 0.033293724, 4.49283, -0.26619983)
+ingredient_data = SubResource("Resource_ft1c3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1277158251]
+transform = Transform3D(2.880179, 0, 0, 0, 2.9676163, 0, 0, 0, 1.9874341, -0.5720253, 11.836135, 26.011868)
+size = Vector3(12.769531, 7.185425, 3.9353027)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D2" unique_id=495901206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025551796, 2.3601608, -1.6265984)
+operation = 2
+size = Vector3(11.1710205, 1, 1.2678223)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D2" unique_id=812483626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05110383, 0.7673025, -1.5789833)
+operation = 2
+size = Vector3(11.1710205, 1, 1.2678223)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D2" unique_id=2073949117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025551796, -0.74431705, -1.6265984)
+operation = 2
+size = Vector3(11.1710205, 1, 1.2678223)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D2" unique_id=1909530922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025551796, -2.0895185, -1.6265984)
+operation = 2
+size = Vector3(11.1710205, 1, 1.2678223)
+
+[node name="FlaskSpawnPoint" type="Marker3D" parent="." unique_id=255741544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1899652, 3.0870495)
+
+[node name="Node3D" parent="." unique_id=982588470 instance=ExtResource("5_gx60c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5756953, 3.4783106, -0.15966702)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=396880093]
+transform = Transform3D(0.9988118, 0, -0.04873398, 0, 1, 0, 0.04873398, 0, 0.9988118, 0, 23.078426, -33.66256)
+size = Vector3(109.51172, 48.075928, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D3" unique_id=1252981330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.130943, -18.66154, -0.048046112)
+operation = 2
+size = Vector3(2.317871, 4.517456, 1.5888672)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D3" unique_id=870523470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2955284, -10.461399, 0.06435013)
+operation = 2
+size = Vector3(12.151611, 21.533798, 1.5888672)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D3" unique_id=1895098421]
+transform = Transform3D(0.96600676, -0.2585115, 0.0016586035, 0.2585115, 0.9659258, -0.012613282, 0.0016585961, 0.01261328, 0.99991906, -6.475383, -2, 0.50452805)
+size = Vector3(14, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D3" unique_id=592837385]
+transform = Transform3D(0.98535824, -0.17049359, 0.00071439147, 0.17049365, 0.98532355, -0.008318715, 0.00071439147, 0.008318709, 0.99996513, -5.863551, -8.059191, 0.591671)
+size = Vector3(14, 1, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D3" unique_id=1219286098]
+transform = Transform3D(0.94198334, 0.3356475, 0.002830755, -0.33564746, 0.9418452, 0.016376892, 0.00283074, -0.016376903, 0.9998619, -5.8607464, -13.540549, 0.64917374)
+size = Vector3(14, 1, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D3" unique_id=231601266]
+transform = Transform3D(0.9999994, 0.0009196926, 1.8626451e-08, -0.0009194653, 0.9999995, 4.484877e-05, 2.2351742e-08, -4.487733e-05, 1.0000001, -6.031607, -19.161804, 0.06605148)
+size = Vector3(14, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=153962518]
+transform = Transform3D(0.99912703, 0, -0.041775756, 0, 1, 0, 0.041775756, 0, 0.99912703, 0, 24.822937, 26.506859)
+size = Vector3(109.51172, 48.075928, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1717111950]
+transform = Transform3D(-0.035816036, 0, 0.99935853, 0, 1, 0, -0.99935853, 0, -0.035816036, 46.181854, 24.07222, 6.1987267)
+size = Vector3(109.51172, 48.075928, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1644108667]
+transform = Transform3D(-0.05157993, 0, -0.9986691, 0, 1, 0, 0.9986691, 0, -0.05157993, -48.658314, 23.305279, -10.578022)
+size = Vector3(109.51172, 48.075928, 1)
+
+[node name="PotionPortal" parent="." unique_id=2001074265 instance=ExtResource("7_vhlyg")]
+transform = Transform3D(0.10767349, -0.038259365, 0.9934499, 0.0041225376, 0.9992678, 0.03803661, -0.9941778, 0, 0.10775238, 16.288265, 4.7720547, 0.8157091)
+
+[connection signal="activate" from="Node3D" to="Cauldron" method="on_potion_complete"]

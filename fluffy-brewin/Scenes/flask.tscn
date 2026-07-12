@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://704ek5cfaeeh"]
+
+[ext_resource type="Script" uid="uid://0elkhrcggeqk" path="res://Scripts/Flask.gd" id="1_nferi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ssmoh"]
+height = 1.5910645
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_twqgv"]
+albedo_color = Color(1, 1, 1, 0.13333334)
+
+[node name="Flask" type="RigidBody3D" unique_id=632362871]
+script = ExtResource("1_nferi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2024968477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7900964, 0)
+shape = SubResource("CylinderShape3D_ssmoh")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=251173782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7918054, 0)
+height = 1.5944824
+sides = 11
+material = SubResource("StandardMaterial3D_twqgv")

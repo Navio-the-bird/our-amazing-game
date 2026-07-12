@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c5ecjme2hk28v"]
+
+[ext_resource type="Script" uid="uid://bcu8l2opu1chw" path="res://Scripts/Portal.gd" id="1_km6rq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kmj3"]
+albedo_color = Color(1, 0.24705882, 1, 0.8784314)
+
+[node name="PotionPortal" type="Node3D" unique_id=2001074265]
+script = ExtResource("1_km6rq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=744786228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009, 0, 0)
+size = Vector3(2.3134766, 3.852539, 0.052734375)
+material = SubResource("StandardMaterial3D_6kmj3")

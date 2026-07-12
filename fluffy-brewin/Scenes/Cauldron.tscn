@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://clyaqafn5ls2d"]
+
+[ext_resource type="Script" uid="uid://bl03qo67yreoo" path="res://Scripts/cauldronPotionCollide.gd" id="1_a46rn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jpwg8"]
+height = 0.32543945
+radius = 0.7158203
+
+[node name="Cauldron" type="Node3D" unique_id=183185541]
+script = ExtResource("1_a46rn")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=796269057]
+transform = Transform3D(2.7218149, 0, 0, 0, 0.66017705, 0, 0, 0, 2.8717802, 0, -0.9492463, 0)
+use_collision = true
+radius = 0.81152344
+height = 4.8757324
+sides = 15
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D" unique_id=1071042432]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.048156, 0, 0, 0, 1, 0, 1.6964417, 0)
+operation = 2
+radius = 0.7104492
+height = 1.7695313
+sides = 16
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=819309885]
+transform = Transform3D(2.7218146, 0, 0, 0, 0.660177, 0, 0, 0, 2.8717802, 0, 0.41932437, 0)
+radius = 0.70410156
+height = 0.09082031
+sides = 16
+
+[node name="Area3D" type="Area3D" parent="CSGCylinder3D2" unique_id=1064700274]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCylinder3D2/Area3D" unique_id=474342737]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, -0.10168457, 0)
+shape = SubResource("CylinderShape3D_jpwg8")
+
+[connection signal="body_entered" from="CSGCylinder3D2/Area3D" to="." method="_on_collide"]
