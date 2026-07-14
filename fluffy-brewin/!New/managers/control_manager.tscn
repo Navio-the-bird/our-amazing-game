@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cy6fyajefoix4"]
+
+[ext_resource type="Script" uid="uid://qvdoerrh574g" path="res://!New/managers/control_manager.gd" id="1_kotua"]
+
+[node name="ControlManager" type="Node" unique_id=1001690283]
+script = ExtResource("1_kotua")

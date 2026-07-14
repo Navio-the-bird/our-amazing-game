@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://fbpctg7dqclk"]
+
+[ext_resource type="Script" uid="uid://cnxy1xiemr6w8" path="res://!New/entities/entity.gd" id="1_0pkio"]
+[ext_resource type="Texture2D" uid="uid://ct8kymy11hjlg" path="res://icon.svg" id="2_2uj7t"]
+[ext_resource type="Script" uid="uid://che4snxjtaa57" path="res://!New/entities/effect.gd" id="2_ityrf"]
+
+[sub_resource type="Resource" id="Resource_2uj7t"]
+script = ExtResource("2_ityrf")
+modification = null
+metadata/_custom_type_script = "uid://che4snxjtaa57"
+
+[sub_resource type="Resource" id="Resource_ityrf"]
+script = ExtResource("2_ityrf")
+modification = null
+metadata/_custom_type_script = "uid://che4snxjtaa57"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2uj7t"]
+
+[node name="Entity" type="CharacterBody3D" unique_id=1388189674]
+script = ExtResource("1_0pkio")
+effects = Array[ExtResource("2_ityrf")]([SubResource("Resource_2uj7t"), SubResource("Resource_ityrf")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=632382587]
+shape = SubResource("CapsuleShape3D_2uj7t")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1314479393]
+billboard = 1
+texture = ExtResource("2_2uj7t")

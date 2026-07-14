@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bkgmi1vyw45wi"]
+
+[ext_resource type="PackedScene" uid="uid://cjphsbd7hpvo6" path="res://!New/environment/environment.tscn" id="1_e0n0m"]
+[ext_resource type="PackedScene" uid="uid://fbpctg7dqclk" path="res://!New/entities/entity.tscn" id="2_12xwe"]
+[ext_resource type="PackedScene" uid="uid://cy6fyajefoix4" path="res://!New/managers/control_manager.tscn" id="3_2qaha"]
+
+[node name="Main Game" type="Node3D" unique_id=1925279789]
+
+[node name="Environment" parent="." unique_id=959848223 instance=ExtResource("1_e0n0m")]
+
+[node name="Entity" parent="." unique_id=1388189674 instance=ExtResource("2_12xwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Entity" unique_id=853766523]
+transform = Transform3D(1, 0, 0, 0, 0.63607824, 0.77162457, 0, -0.77162457, 0.63607824, 0, 4, 3)
+
+[node name="ControlManager" parent="." unique_id=1001690283 instance=ExtResource("3_2qaha")]
